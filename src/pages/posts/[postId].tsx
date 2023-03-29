@@ -3,6 +3,7 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import { getAllPostIds, getPostData } from "../../../utils/posts";
 import utilStyles from "../../styles/utils.module.scss";
+import { InferGetStaticPropsType } from 'next'
 
 interface PostDataProp {
   postData: {
@@ -30,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 }
 
-export default function Post({ postData }: PostDataProp) {
+export default function Post({ postData } : InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <Layout>
       <Head>
