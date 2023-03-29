@@ -1,13 +1,8 @@
 import { Layout, Date } from "@/components";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { getAllPostIds, getPostData } from "../../../utils/posts";
 import utilStyles from "../../styles/utils.module.scss";
-
-interface ParamProp {
-  params: {
-    postId: string;
-  };
-}
 
 interface PostDataProp {
   postData: {
@@ -26,8 +21,8 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }: ParamProp) {
-  const postData = await getPostData(params.postId);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const postData = await getPostData(params?.postId as string);
   return {
     props: {
       postData,
